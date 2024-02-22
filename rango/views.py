@@ -1,14 +1,10 @@
-from rango.models import Category
-from rango.models import Page
-from django.shortcuts import render
-from rango.forms import CategoryForm
-from django.shortcuts import redirect
-from django.urls import reverse
-from rango.forms import PageForm
-from rango.forms import UserForm, UserProfileForm
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from rango.models import Category, Page
+from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
 from datetime import datetime
 
 def index(request):
@@ -125,7 +121,7 @@ def add_page(request, category_name_slug):
 
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
-
+'''
 def register(request):
     # A boolean value for telling the template
     # whether the registration was successful.
@@ -227,20 +223,21 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request, 'rango/login.html')
-
+'''
 @login_required
 def restricted(request):
     return HttpResponse("Since you're logged in, you can see this text!")
 
 # Use the login_required() decorator to ensure only those logged in can
 # access the view.
+'''
 @login_required
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
     #Take the user back to the homepage.
     return redirect(reverse('rango:index'))
-
+'''
 
 # A helper method
 def get_server_side_cookie(request, cookie, default_val=None):
